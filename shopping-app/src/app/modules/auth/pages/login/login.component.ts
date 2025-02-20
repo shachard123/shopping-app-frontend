@@ -16,7 +16,7 @@ export class LoginComponent {
   
   login() {
     if (this.authService.login(this.username, this.password)) {
-      this.router.navigate(['/home']); // Redirect to home after login
+      this.router.navigate(['/']); // Redirect to home after login
       console.log('Login successful!');
     } else {
       console.log('Invalid credentials!');

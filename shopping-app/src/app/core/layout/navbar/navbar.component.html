@@ -1,5 +1,18 @@
 <mat-toolbar color="primary">
-  <span> TheCoolShop </span>
-  <button mat-button routerLink="/auth/login">Login</button>
-  <button mat-button routerLink="/auth/signup">Sign Up</button>
-</mat-toolbar>
+    <a routerLink="/" class="text-logo"> TheCoolShop </a>
+  
+    <!-- Show Welcome Message if Logged In -->
+    <span *ngIf="isLoggedIn" class="welcome-text">  Welcome, {{ username }}</span>
+  
+    <span class="spacer"></span> <!-- Push buttons to the right -->
+  
+    <!-- Show Login & Signup for Guests -->
+    <ng-container *ngIf="!isLoggedIn">
+      <button mat-button routerLink="/auth/login">Login</button>
+      <button mat-button routerLink="/auth/signup">Sign Up</button>
+    </ng-container>
+  
+    <!-- Show Logout Button for Logged-in Users -->
+    <button *ngIf="isLoggedIn" mat-button (click)="logout()">Logout</button>
+  </mat-toolbar>
+  
