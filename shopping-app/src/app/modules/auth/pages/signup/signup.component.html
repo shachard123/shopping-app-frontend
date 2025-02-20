@@ -2,24 +2,25 @@
     <mat-card>
       <mat-card-title>Sign Up</mat-card-title>
       <mat-card-content>
-        <form>
+        <form (ngSubmit)="signup()">
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Username</mat-label>
-            <input matInput type="text" required>
+            <input matInput type="text"  [(ngModel)]="username" name="username" required>
           </mat-form-field>
   
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Password</mat-label>
-            <input matInput type="password" required>
+            <input matInput type="password"  [(ngModel)]="password" name="password" required>
           </mat-form-field>
   
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Confirm Password</mat-label>
-            <input matInput type="password" required>
+            <input matInput type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required>
           </mat-form-field>
   
-          <button mat-raised-button color="primary" class="full-width">Sign Up</button>
+          <button mat-raised-button color="primary" class="full-width" type="submit">Sign Up</button>
         </form>
+        <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
         <p class="redirect-text">
           Already have an account? <a routerLink="/auth/login">Login</a>
         </p>
