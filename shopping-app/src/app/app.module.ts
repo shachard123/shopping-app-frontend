@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './core/layout/navbar/navbar.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NavbarComponent } from './core/layout/navbar/navbar.component';
     BrowserAnimationsModule, 
     MatToolbarModule,
     MatButtonModule,
-    AuthModule
+    AuthModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,18 +1,32 @@
 <mat-toolbar color="primary">
-    <a routerLink="/" class="text-logo"> TheCoolShop </a>
+    <!-- Left side: Logo and optional welcome text -->
+    <div class="logo-welcome">
+      <a routerLink="/" class="text-logo">TheCoolShop</a>
+      <ng-container *ngIf="currentUser$ | async as user">
+        <span class="welcome-text">Welcome, {{ user.username }}</span>
+      </ng-container>
+    </div>
   
-    <!-- Show Welcome Message if Logged In -->
-    <span *ngIf="isLoggedIn" class="welcome-text">  Welcome, {{ username }}</span>
+    <!-- Spacer pushes the right-side buttons to the end -->
+    <span class="spacer"></span>
   
-    <span class="spacer"></span> <!-- Push buttons to the right -->
-  
-    <!-- Show Login & Signup for Guests -->
-    <ng-container *ngIf="!isLoggedIn">
-      <button mat-button routerLink="/auth/login">Login</button>
-      <button mat-button routerLink="/auth/signup">Sign Up</button>
+    <!-- Right side: Auth actions -->
+    <ng-container *ngIf="currentUser$ | async as user; else guest">
+      <button mat-button (click)="logout()" aria-label="Logout">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
     </ng-container>
   
-    <!-- Show Logout Button for Logged-in Users -->
-    <button *ngIf="isLoggedIn" mat-button (click)="logout()">Logout</button>
+    <ng-template #guest>
+      <button mat-button routerLink="/auth/login" aria-label="Login">
+        <mat-icon>login</mat-icon>
+        Login
+      </button>
+      <button mat-button routerLink="/auth/signup" aria-label="Sign Up">
+        <mat-icon>person_add</mat-icon>
+        Sign Up
+      </button>
+    </ng-template>
   </mat-toolbar>
   

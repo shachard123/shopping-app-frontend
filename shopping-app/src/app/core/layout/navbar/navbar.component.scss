@@ -1,4 +1,23 @@
 .text-logo {
-  color: #fff;
-  text-decoration: none;
-}
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .logo-welcome {
+    display: flex;
+    align-items: center;
+  }
+  
+  .welcome-text {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #fff;
+    margin-left: 1rem; // small spacing between the logo and welcome text
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
