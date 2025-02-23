@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService, User } from 'src/app/core/authentication/authentication.service';
 import { Observable } from 'rxjs';
+import { Output, EventEmitter } from '@angular/core';
+import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,10 +12,11 @@ import { Observable } from 'rxjs';
 })
 export class NavbarComponent {
   currentUser$: Observable<User | null> = this.authService.currentUser$;
-  
+
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private searchService: SearchService
   ) {}
 
   logout() {
@@ -21,4 +24,8 @@ export class NavbarComponent {
     this.router.navigate(['/auth/login']); // Redirect to login page after logout
   }
 
+  onSearch(event: Event) {
+    const query = (event.target as HTMLInputElement).value;
+    this.searchService.updateSearch(query); // ✅ Send search term to the service
+  }
 }
