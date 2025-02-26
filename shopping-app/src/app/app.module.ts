@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input'; // ✅ Allows input fi
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './core/layout/navbar/navbar.component';
 import { FormsModule } from '@angular/forms'; // ✅ Required for (input)="onSearch()"
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FormsModule } from '@angular/forms'; // ✅ Required for (input)="onSea
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule, // ✅ Added
-    MatInputModule // ✅ Added
+    MatInputModule, // ✅ Added
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
