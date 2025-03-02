@@ -18,6 +18,12 @@ export class LoginComponent {
   ) {}
 
   login() {
+    //check if the username and password are not empty
+    if (!this.username || !this.password) {
+      this.errorMessage = 'Please fill out the form!';
+      return;
+    }
+
     this.authService.login(this.username, this.password).subscribe({
       next: () => {
         this.router.navigate(['/']); // Redirect to home after login
