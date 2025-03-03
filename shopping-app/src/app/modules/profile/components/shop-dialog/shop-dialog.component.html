@@ -1,0 +1,28 @@
+<div class="create-shop-container">
+  <mat-card>
+    <h2>Create New Shop</h2>
+    <form (ngSubmit)="addShop()">
+      <mat-form-field appearance="outline">
+        <mat-label>Shop Name</mat-label>
+        <input matInput [(ngModel)]="newShopName" name="shopName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Shop Description</mat-label>
+        <input
+          matInput
+          [(ngModel)]="newShopDescription"
+          name="shopDescription"
+          required
+        />
+      </mat-form-field>
+
+      <div class="dialog-actions">
+        <button mat-raised-button color="primary" type="submit">Create</button>
+        <button mat-button type="button" (click)="dialogRef.close()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

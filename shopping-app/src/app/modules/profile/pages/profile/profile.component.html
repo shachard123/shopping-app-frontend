@@ -1,37 +1,36 @@
-<div class="profile-container">
-    <h2>Welcome, {{ username }}</h2>
-  
-    <button mat-button color="primary" routerLink="/orders">My Orders</button>
-  
-    <h3>My Shops</h3>
-    <div *ngIf="shops.length; else noShops">
-      <div class="shops-list">
-        <mat-card *ngFor="let shop of shops" class="shop-card">
-          <mat-card-title>{{ shop.name }}</mat-card-title>
-          <mat-card-content>{{ shop.description }}</mat-card-content>
-          <button mat-button color="warn" (click)="deleteShop(shop.id)">Delete</button>
-        </mat-card>
+<h2>{{ username }}'s profile</h2>
+
+<!-- ✅ Mini Navbar Tabs -->
+<mat-tab-group>
+  <!-- My Orders Tab -->
+  <mat-tab label="My Orders">
+    <div class="orders-container">
+      <p>Order history will go here...</p>
+    </div>
+  </mat-tab>
+
+  <!-- My Shops Tab -->
+   
+  <mat-tab label="My Shops">
+    <div class="shops-container">
+      <div class="shop-grid">
+        <!-- ✅ Show all shops -->
+        <div class="shop-card" *ngFor="let shop of shops">
+          <mat-card>
+            <mat-card-title>{{ shop.name }}</mat-card-title>
+            <mat-card-subtitle>{{ shop.description }}</mat-card-subtitle>
+            <button mat-button color="warn" (click)="deleteShop(shop.id)">Delete</button>
+          </mat-card>
+        </div>
+
+        <!-- ✅ "Add Shop" Button Styled as a Card -->
+        <div class="shop-card">
+          <mat-card class="add-shop-card" (click)="openShopDialog()">
+            <mat-icon>add</mat-icon>
+            <p>Add New Shop</p>
+          </mat-card>
+        </div>
       </div>
     </div>
-    <ng-template #noShops>
-      <p>No shops yet. Create one below!</p>
-    </ng-template>
-  
-    <mat-form-field>
-      <mat-label>Shop Name</mat-label>
-      <input matInput [(ngModel)]="newShopName">
-    </mat-form-field>
-    
-    <mat-form-field>
-      <mat-label>Shop Description</mat-label>
-      <input matInput [(ngModel)]="newShopDescription">
-    </mat-form-field>
-  
-    <button mat-fab color="accent" class="add-shop-btn" (click)="addShop()">
-      <mat-icon>add</mat-icon>
-    </button>
-  
-    <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
-    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-  </div>
-  
+  </mat-tab>
+</mat-tab-group>

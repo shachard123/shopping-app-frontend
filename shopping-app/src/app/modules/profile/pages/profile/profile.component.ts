@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService, Shop } from 'src/app/core/services/shop.service';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ShopDialogComponent } from '../../components/shop-dialog/shop-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -12,10 +14,12 @@ export class ProfileComponent implements OnInit {
   shops: Shop[] = [];
   newShopName = '';
   newShopDescription = '';
-  errorMessage = '';
-  successMessage = '';
 
-  constructor(private shopService: ShopService, private authService: AuthenticationService) {}
+  constructor(
+    private shopService: ShopService, 
+    private authService: AuthenticationService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.username = this.authService.getLoggedInUser()?.username || 'User';
@@ -26,47 +30,25 @@ export class ProfileComponent implements OnInit {
   loadMyShops() {
     this.shopService.getMyShops().subscribe(
       (shops) => (this.shops = shops),
-      () => (this.errorMessage = 'Failed to load shops')
+      () => console.error("Failed to load shops")
     );
   }
 
-  /** ✅ Create a new shop */
-  addShop() {
-    if (!this.newShopName.trim() || !this.newShopDescription.trim()) {
-      this.errorMessage = 'Shop name and description are required';
-      return;
-    }
-
-    this.shopService.createShop({ 
-      name: this.newShopName, 
-      description: this.newShopDescription, 
-      phone: "123-456-7890", 
-      address: "Unknown", 
-      paymentDetails: "None", 
-      country: "Unknown"
-    }).subscribe(
-      (response) => {
-        this.successMessage = 'Shop created successfully!';
-        this.newShopName = '';
-        this.newShopDescription = '';
-        this.loadMyShops(); // Refresh shop list
-      },
-      () => {
-        this.errorMessage = 'Failed to create shop';
-      }
-    );
+  /** ✅ Open Shop Creation Pop-up */
+  openShopDialog() {
+    const dialogRef = this.dialog.open(ShopDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) this.loadMyShops(); // Refresh after creating a shop
+    });
   }
 
-  /** ✅ Delete a shop */
   deleteShop(shopId: string) {
-    this.shopService.deleteShop(shopId).subscribe(
-      () => {
-        this.successMessage = 'Shop deleted successfully!';
-        this.loadMyShops(); // Refresh shop list
+    this.shopService.deleteShop(shopId).subscribe({
+      next: () =>{
+        this.loadMyShops(); // ✅ Refresh shop list after deletion
       },
-      () => {
-        this.errorMessage = 'Failed to delete shop';
-      }
-    );
+      error: (e) => console.error("Failed to delete shop with error ", e)
+    });
   }
+  
 }
