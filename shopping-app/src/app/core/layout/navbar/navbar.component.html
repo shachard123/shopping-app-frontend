@@ -11,20 +11,27 @@
 
   <!-- Search Bar -->
   <div class="search-bar">
-    <input matInput (input)="onSearch($event)" type="text" placeholder="Search...">
+    <input
+      matInput
+      (input)="onSearch($event)"
+      type="text"
+      placeholder="Search..."
+    />
     <button aria-label="Search">
       <mat-icon>search</mat-icon>
     </button>
   </div>
-
-
-  
 
   <!-- Spacer pushes the right-side buttons to the end -->
   <span class="spacer"></span>
 
   <!-- Right side: Auth actions -->
   <ng-container *ngIf="currentUser$ | async as user; else guest">
+    <button mat-button routerLink="/profile" aria-label="Profile">
+      <mat-icon>person</mat-icon>
+      Profile
+    </button>
+
     <button mat-button (click)="logout()" aria-label="Logout">
       <mat-icon>logout</mat-icon>
       Logout

@@ -1,0 +1,20 @@
+.profile-container {
+    padding: 20px;
+  }
+  
+  .shops-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .shop-card {
+    width: 250px;
+  }
+  
+  .add-shop-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
