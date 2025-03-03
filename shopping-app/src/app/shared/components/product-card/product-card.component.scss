@@ -1,0 +1,21 @@
+.product-card {
+  width: 250px;
+  text-align: center;
+}
+
+.product-card img {
+    width: 250px;   // ✅ Fixed width
+    height: 250px;  // ✅ Fixed height
+    object-fit: contain; // ✅ Prevents cropping, fits image inside box
+    background-color: white; // ✅ Adds a background for non-square images
+    border: 1px solid #ddd; // ✅ Optional border for better visuals
+    display: block;
+    margin: auto;
+  }
+  
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: green;
+}

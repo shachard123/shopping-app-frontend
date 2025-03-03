@@ -1,5 +1,44 @@
 <mat-toolbar color="primary">
-  <span> TheCoolShop </span>
-  <button mat-button routerLink="/auth/login">Login</button>
-  <button mat-button routerLink="/auth/signup">Sign Up</button>
+  <!-- Left side: Logo and optional welcome text -->
+  <div class="logo-welcome">
+    <a routerLink="/" class="text-logo">TheCoolShop</a>
+    <ng-container *ngIf="currentUser$ | async as user">
+      <span class="welcome-text">Welcome, {{ user.username }}</span>
+    </ng-container>
+  </div>
+
+  <span class="spacer"></span>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input matInput (input)="onSearch($event)" type="text" placeholder="Search...">
+    <button aria-label="Search">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+
+
+  
+
+  <!-- Spacer pushes the right-side buttons to the end -->
+  <span class="spacer"></span>
+
+  <!-- Right side: Auth actions -->
+  <ng-container *ngIf="currentUser$ | async as user; else guest">
+    <button mat-button (click)="logout()" aria-label="Logout">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </ng-container>
+
+  <ng-template #guest>
+    <button mat-button routerLink="/auth/login" aria-label="Login">
+      <mat-icon>login</mat-icon>
+      Login
+    </button>
+    <button mat-button routerLink="/auth/signup" aria-label="Sign Up">
+      <mat-icon>person_add</mat-icon>
+      Sign Up
+    </button>
+  </ng-template>
 </mat-toolbar>
