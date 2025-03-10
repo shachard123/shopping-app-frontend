@@ -16,18 +16,20 @@
       <div class="shop-grid">
         <!-- ✅ Show all shops -->
         <div class="shop-card" *ngFor="let shop of shops">
-          <mat-card (click)="goToShop(shop.id)" style="cursor: pointer;">
-            <img *ngIf="shop.logoBase64; else defaultImage" [src]="shop.logoBase64"  alt="Shop Logo" class="shop-logo" />
-            <ng-template #defaultImage>
-              <img src="assets/shop.png" alt="Shop Logo" class="shop-logo" />
-            </ng-template>
-            <mat-card-title>{{ shop.name }}</mat-card-title>
-            <mat-card-subtitle>{{ shop.description }}</mat-card-subtitle>
+          <mat-card>
+            <div (click)="goToShop(shop.id)" style="cursor: pointer;">
+              <img *ngIf="shop.logoBase64; else defaultImage" [src]="shop.logoBase64"  alt="Shop Logo" class="shop-logo" />
+              <ng-template #defaultImage>
+                <img src="assets/shop.png" alt="Shop Logo" class="shop-logo" />
+              </ng-template>
+              <mat-card-title>{{ shop.name }}</mat-card-title>
+              <mat-card-subtitle>{{ shop.description }}</mat-card-subtitle>
+            </div>
             <button mat-button color="warn" (click)="deleteShop(shop.id)">Delete</button>
           </mat-card>
         </div>
 
-        <!-- ✅ "Add Shop" Button Styled as a Card -->
+        <!-- button to add a new shop -->
         <div class="shop-card">
           <mat-card class="add-shop-card" (click)="openShopDialog()">
             <mat-icon>add</mat-icon>

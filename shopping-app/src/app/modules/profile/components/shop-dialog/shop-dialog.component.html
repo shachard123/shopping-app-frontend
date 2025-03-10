@@ -9,18 +9,84 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Shop Description</mat-label>
-        <input matInput [(ngModel)]="newShopDescription" name="shopDescription" required />
+        <input
+          matInput
+          [(ngModel)]="newShopDescription"
+          name="shopDescription"
+          required
+        />
       </mat-form-field>
 
-      <!-- ✅ Upload Image Field -->
-      <div class="upload-container">
-        <input type="file" (change)="handleFileInput($event)" accept="image/*" />
-        <p *ngIf="newShopLogoBase64">✅ Image Uploaded</p>
-      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input
+          matInput
+          [(ngModel)]="phone"
+          name="Phone"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input
+          matInput
+          [(ngModel)]="address"
+          name="Address"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Payment Details</mat-label>
+        <input
+          matInput
+          [(ngModel)]="paymentDetails"
+          name="Payment Details"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Country</mat-label>
+        <input
+          matInput
+          [(ngModel)]="country"
+          name="Country"
+          required
+        />
+      </mat-form-field>
+
+      <!-- File Upload -->
+      <mat-form-field appearance="outline">
+        <mat-label>Shop Logo⬆</mat-label>
+        <!-- This read-only input just shows the file name -->
+        <input
+          matInput
+          [value]="selectedFileName"
+          placeholder="No file selected"
+          readonly
+          (click)="fileInput.click()"
+          style="cursor: pointer;"
+        />
+        <!-- Hidden native file input -->
+        <input
+          #fileInput
+          type="file"
+          style="display: none"
+          (change)="handleFileInput($event)"
+          accept="image/*"
+        />
+      </mat-form-field>
+      <p class="upload-message" *ngIf="newShopLogoBase64">Image Uploaded</p>
+
+
 
       <div class="dialog-actions">
         <button mat-raised-button color="primary" type="submit">Create</button>
-        <button mat-button type="button" (click)="dialogRef.close()">Cancel</button>
+        <button mat-button type="button" (click)="dialogRef.close()">
+          Cancel
+        </button>
       </div>
     </form>
   </mat-card>
