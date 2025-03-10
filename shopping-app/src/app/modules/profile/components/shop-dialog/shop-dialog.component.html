@@ -9,19 +9,18 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Shop Description</mat-label>
-        <input
-          matInput
-          [(ngModel)]="newShopDescription"
-          name="shopDescription"
-          required
-        />
+        <input matInput [(ngModel)]="newShopDescription" name="shopDescription" required />
       </mat-form-field>
+
+      <!-- ✅ Upload Image Field -->
+      <div class="upload-container">
+        <input type="file" (change)="handleFileInput($event)" accept="image/*" />
+        <p *ngIf="newShopLogoBase64">✅ Image Uploaded</p>
+      </div>
 
       <div class="dialog-actions">
         <button mat-raised-button color="primary" type="submit">Create</button>
-        <button mat-button type="button" (click)="dialogRef.close()">
-          Cancel
-        </button>
+        <button mat-button type="button" (click)="dialogRef.close()">Cancel</button>
       </div>
     </form>
   </mat-card>

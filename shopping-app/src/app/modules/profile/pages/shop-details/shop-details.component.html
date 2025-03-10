@@ -1,0 +1,30 @@
+<div class="shop-details-container" *ngIf="shop">
+  <!-- ✅ Shop Logo -->
+  <img
+    [src]="shop.logoBase64 ? shop.logoBase64 : 'assets/default-shop.png'"
+    alt="Shop Logo"
+    class="shop-logo"
+  />
+
+  <h2>{{ shop.name }}</h2>
+  <p><strong>Description:</strong> {{ shop.description }}</p>
+  <p><strong>Phone:</strong> {{ shop.phone }}</p>
+  <p><strong>Address:</strong> {{ shop.address }}</p>
+  <p><strong>Country:</strong> {{ shop.country }}</p>
+
+  <!-- ✅ Display Products -->
+  <h3>Products</h3>
+  <!-- <div class="product-grid">
+    <div class="product-card" *ngFor="let product of shop.products">
+      <mat-card>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>{{ product.price | currency }}</mat-card-subtitle>
+        <img
+          [src]="product.imageBase64"
+          alt="Product Image"
+          class="product-image"
+        />
+      </mat-card>
+    </div>
+  </div> -->
+</div>

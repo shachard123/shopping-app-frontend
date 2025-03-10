@@ -11,6 +11,7 @@ export interface Shop {
   address: string;
   paymentDetails: string;
   country: string;
+  logoBase64?: string;
 }
 
 @Injectable({
@@ -38,6 +39,7 @@ export class ShopService {
 
   /** ✅ Create a new shop */
   createShop(shop: Omit<Shop, 'id'>): Observable<{ shopId: string }> {
+    console.log(shop);
     return this.http.post<{ shopId: string }>(this.apiUrl, shop, this.getAuthHeaders());
   }
 

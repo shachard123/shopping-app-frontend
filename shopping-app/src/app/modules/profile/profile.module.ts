@@ -11,10 +11,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog'; // ✅ Dialog
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShopDetailsComponent } from './pages/shop-details/shop-details.component';
 
 
 @NgModule({
-  declarations: [ProfileComponent, ShopDialogComponent],
+  declarations: [ProfileComponent, ShopDialogComponent, ShopDetailsComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,
