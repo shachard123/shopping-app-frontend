@@ -12,7 +12,7 @@ export interface User {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:8080/users'; // ✅ Change to your backend URL
+  private apiUrl = 'http://localhost:8080/users'; 
   private loggedInUserKey = 'loggedInUser'; // Stores JWT token
 
   private currentUserSubject = new BehaviorSubject<User | null>(
@@ -41,18 +41,15 @@ export class AuthenticationService {
   }
   
 
-  /** ✅ Logout */
   logout(): void {
     localStorage.removeItem(this.loggedInUserKey);
     this.currentUserSubject.next(null);
   }
 
-  /** ✅ Check if User is Logged In */
   isLoggedin(): boolean {
     return !!localStorage.getItem(this.loggedInUserKey);
   }
 
-  /** ✅ Get Logged-in User */
   getLoggedInUser(): User | null {
     return localStorage.getItem(this.loggedInUserKey)
       ? JSON.parse(localStorage.getItem(this.loggedInUserKey)!)

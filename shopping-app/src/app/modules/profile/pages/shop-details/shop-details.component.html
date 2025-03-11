@@ -1,7 +1,7 @@
 <div class="shop-details-container" *ngIf="shop">
   <!-- ✅ Shop Logo -->
   <img
-    [src]="shop.logoBase64 ? shop.logoBase64 : 'assets/default-shop.png'"
+    [src]="shop.logoBase64 ? shop.logoBase64 : 'assets/shop.png'"
     alt="Shop Logo"
     class="shop-logo"
   />
@@ -14,6 +14,19 @@
 
   <!-- ✅ Display Products -->
   <h3>Products</h3>
+  <div class="products-grid">
+    <app-product-card
+      *ngFor="let product of shopProducts"
+      [product]="product"
+    ></app-product-card>
+
+    <div class="product-card">
+      <mat-card class="add-product-card">
+        <mat-icon>add</mat-icon>
+        <p>Add New Product</p>
+      </mat-card>
+    </div>
+  </div>
   <!-- <div class="product-grid">
     <div class="product-card" *ngFor="let product of shop.products">
       <mat-card>

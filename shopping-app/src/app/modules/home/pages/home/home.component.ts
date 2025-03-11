@@ -19,13 +19,17 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.products = this.productService.getProducts();
-    this.filteredProducts = this.products;
-
+    this.loadProducts()
     this.searchSubscription = this.searchService.searchQuery$.subscribe(
       (query) => {
         this.filterProducts(query);
       }
+    );
+  }
+
+  loadProducts() {
+    this.productService.getAllProducts().subscribe(
+      (products) => { this.products = products; this.filteredProducts = products; }
     );
   }
 

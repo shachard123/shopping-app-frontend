@@ -12,10 +12,20 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog'; // ✅ Dialog
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShopDetailsComponent } from './pages/shop-details/shop-details.component';
-
-
+import { OrdersComponent } from './pages/orders/orders.component';
+import { ShopsComponent } from './pages/shops/shops.component';
+import { ProductDialogComponent } from './components/product-dialog/product-dialog.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
-  declarations: [ProfileComponent, ShopDialogComponent, ShopDetailsComponent],
+  declarations: [
+    ProfileComponent,
+    ShopDialogComponent,
+    ShopDetailsComponent,
+    OrdersComponent,
+    ShopsComponent,
+    ProductDialogComponent,
+
+  ],
   imports: [
     CommonModule,
     ProfileRoutingModule,
@@ -27,7 +37,8 @@ import { ShopDetailsComponent } from './pages/shop-details/shop-details.componen
     MatInputModule,
     MatDialogModule, // ✅ Dialog
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    SharedModule,
+  ],
 })
-export class ProfileModule { }
+export class ProfileModule {}

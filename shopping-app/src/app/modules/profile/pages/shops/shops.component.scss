@@ -1,0 +1,42 @@
+.profile-container {
+    padding: 20px;
+  }
+  
+  .shops-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .orders-container,
+  .shops-container {
+    padding: 16px;
+  }
+  
+  .shop-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .shop-card {
+    width: 250px;
+  }
+  
+  .add-shop-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed gray;
+    cursor: pointer;
+    text-align: center;
+    padding: 70px;
+  }
+  
+  .shop-logo {
+    height: 100px;
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
