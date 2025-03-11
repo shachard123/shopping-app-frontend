@@ -5,7 +5,7 @@ import { UtilsService } from 'src/app/core/services/utils.service';
 @Component({
   selector: 'app-shop-dialog',
   templateUrl: './shop-dialog.component.html',
-  styleUrls: ['./shop-dialog.component.scss']
+  styleUrls: ['./shop-dialog.component.scss'],
 })
 export class ShopDialogComponent {
   newShopName = '';
@@ -14,7 +14,7 @@ export class ShopDialogComponent {
   address = '';
   paymentDetails = '';
   country = '';
-  newShopLogoBase64: string | undefined = undefined; 
+  newShopLogoBase64: string | undefined = undefined;
   selectedFileName = '';
 
   constructor(
@@ -35,16 +35,20 @@ export class ShopDialogComponent {
   addShop() {
     if (!this.newShopName.trim() || !this.newShopDescription.trim()) return;
 
-    this.shopService.createShop({
-      name: this.newShopName,
-      description: this.newShopDescription,
-      phone: this.phone,
-      address: this.address,
-      paymentDetails: this.paymentDetails,
-      country: this.country,
-      ...this.newShopLogoBase64 ? { logoBase64: this.newShopLogoBase64 } : {}
-    }).subscribe(() => {
-      this.dialogRef.close(true); // ✅ Close pop-up and refresh list
-    });
+    this.shopService
+      .createShop({
+        name: this.newShopName,
+        description: this.newShopDescription,
+        phone: this.phone,
+        address: this.address,
+        paymentDetails: this.paymentDetails,
+        country: this.country,
+        ...(this.newShopLogoBase64
+          ? { logoBase64: this.newShopLogoBase64 }
+          : {}),
+      })
+      .subscribe(() => {
+        this.dialogRef.close(true); // ✅ Close pop-up and refresh list
+      });
   }
 }

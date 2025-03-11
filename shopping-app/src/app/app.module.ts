@@ -17,10 +17,14 @@ import { NavbarComponent } from './core/layout/navbar/navbar.component';
 import { FormsModule } from '@angular/forms'; // ✅ Required for (input)="onSearch()"
 import { HttpClientModule } from '@angular/common/http';
 
+//jwt interceptor
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './interceptors/jwt.service';
+
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule, // ✅ Added
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

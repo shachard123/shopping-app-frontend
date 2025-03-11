@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 export interface Shop {
   id: string;
@@ -22,35 +21,24 @@ export class ShopService {
 
   constructor(private http: HttpClient) {}
 
-  /** ✅ Get all shops */
   getAllShops(): Observable<Shop[]> {
     return this.http.get<Shop[]>(this.apiUrl);
   }
 
-  /** ✅ Get a shop by ID */
   getShopById(shopId: string): Observable<Shop> {
     return this.http.get<Shop>(`${this.apiUrl}/${shopId}`);
   }
 
-  /** ✅ Get shops owned by the logged-in user */
   getMyShops(): Observable<Shop[]> {
-    return this.http.get<Shop[]>(`${this.apiUrl}/my`, this.getAuthHeaders());
+    return this.http.get<Shop[]>(`${this.apiUrl}/my`);
   }
 
-  /** ✅ Create a new shop */
   createShop(shop: Omit<Shop, 'id'>): Observable<{ shopId: string }> {
     console.log(shop);
-    return this.http.post<{ shopId: string }>(this.apiUrl, shop, this.getAuthHeaders());
+    return this.http.post<{ shopId: string }>(this.apiUrl, shop);
   }
 
-  /** ✅ Delete a shop */
   deleteShop(shopId: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${shopId}`, this.getAuthHeaders());
-  }
-
-  /** ✅ Helper function to get Authorization Headers */
-  private getAuthHeaders() {
-    const token = localStorage.getItem('loggedInUser') ? JSON.parse(localStorage.getItem('loggedInUser')!).token : null;
-    return token ? { headers: new HttpHeaders({ Authorization: `Bearer ${token}` }) } : {};
+    return this.http.delete<void>(`${this.apiUrl}/${shopId}`);
   }
 }
