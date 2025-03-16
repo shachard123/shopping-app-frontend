@@ -6,9 +6,6 @@ export interface Product {
     category: string;
     price: number;
     stock: number;
-    colors: string[];
-    dimensions: { length: number; width: number; height: number; weight: number };
-    material: string;
-    imageUrl: string;
+    imageBase64: string;
   }
   

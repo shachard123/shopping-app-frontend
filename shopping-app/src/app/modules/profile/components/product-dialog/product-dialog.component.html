@@ -1,1 +1,75 @@
-<p>product-dialog works!</p>
+<div class="create-product-container">
+    <mat-card>
+      <h2>Create New Product</h2>
+      <form (ngSubmit)="addProduct()">
+        <mat-form-field appearance="outline">
+          <mat-label>Product Name</mat-label>
+          <input matInput [(ngModel)]="productName" name="productName" required />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Product Description</mat-label>
+          <input
+            matInput
+            [(ngModel)]="productDescription"
+            name="productDescription"
+            required
+          />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <input matInput [(ngModel)]="category" name="category" required />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Price</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="price"
+            name="price"
+            required
+          />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Stock</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="stock"
+            name="stock"
+            required
+          />
+        </mat-form-field>
+
+        <!-- File Upload -->
+        <mat-form-field appearance="outline">
+          <mat-label>Product Image</mat-label>
+          <input
+            matInput
+            [value]="selectedFileName"
+            placeholder="No file selected"
+            readonly
+            (click)="fileInput.click()"
+            style="cursor: pointer;"
+          />
+          <input
+            #fileInput
+            type="file"
+            style="display: none"
+            (change)="handleFileInput($event)"
+            accept="image/*"
+          />
+        </mat-form-field>
+        <p class="upload-message" *ngIf="newProductImageBase64">Image Uploaded</p>
+  
+        <div class="dialog-actions">
+          <button mat-raised-button color="primary" type="submit">Create</button>
+          <button mat-button type="button" (click)="dialogRef.close()">Cancel</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  
