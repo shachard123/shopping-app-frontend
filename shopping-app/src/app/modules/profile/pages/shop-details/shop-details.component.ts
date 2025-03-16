@@ -56,4 +56,10 @@ export class ShopDetailsComponent implements OnInit {
       );
     }
   }
+
+  deleteProduct(productId: string) {
+    this.productService.deleteProduct(productId).subscribe(() => {
+      this.loadMyShopProducts(); // Refresh after deleting a product
+    });
+  }
 }

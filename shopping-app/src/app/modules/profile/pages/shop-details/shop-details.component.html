@@ -18,6 +18,8 @@
     <app-product-card
       *ngFor="let product of shopProducts"
       [product]="product"
+      [isShopView]="true"
+      (deleteProduct)="deleteProduct($event)"
     ></app-product-card>
 
     <div class="product-card">
@@ -27,17 +29,4 @@
       </mat-card>
     </div>
   </div>
-  <!-- <div class="product-grid">
-    <div class="product-card" *ngFor="let product of shop.products">
-      <mat-card>
-        <mat-card-title>{{ product.name }}</mat-card-title>
-        <mat-card-subtitle>{{ product.price | currency }}</mat-card-subtitle>
-        <img
-          [src]="product.imageBase64"
-          alt="Product Image"
-          class="product-image"
-        />
-      </mat-card>
-    </div>
-  </div> -->
 </div>

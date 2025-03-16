@@ -1,13 +1,23 @@
 <mat-card class="product-card">
-    <img mat-card-image [src]="product.imageBase64" alt="{{ product.name }}">
-    <mat-card-content>
-      <h2>{{ product.name }}</h2>
-      <p>{{ product.description }}</p>
-      <p class="price">$ {{ product.price }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button color="primary">View Details</button>
+  <img mat-card-image [src]="product.imageBase64" alt="{{ product.name }}" />
+  <mat-card-content>
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <p class="price">$ {{ product.price }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary">View Details</button>
+    <button
+      *ngIf="isShopView; else addToCartBtn"
+      mat-raised-button
+      color="warn"
+      (click)="onDelete()"
+    >
+      Delete
+    </button>
+
+    <ng-template #addToCartBtn>
       <button mat-raised-button color="primary">Add to Cart</button>
-    </mat-card-actions>
-  </mat-card>
-  
+    </ng-template>
+  </mat-card-actions>
+</mat-card>
