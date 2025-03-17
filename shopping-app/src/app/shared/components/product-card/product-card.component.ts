@@ -7,13 +7,13 @@ import { Product } from 'src/app/shared/models/product';
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent {
-  @Input() product!: Product; // Product data will be passed from the parent component
-  @Input() isShopView: boolean = false; // Determines if shown in the shop management page
+  @Input() product!: Product;
+  @Input() isShopView: boolean = false; 
 
 
-  @Output() deleteProduct = new EventEmitter<string>(); // ✅ Emit delete event
+  @Output() deleteProduct = new EventEmitter<string>();
 
   onDelete() {
-    this.deleteProduct.emit(this.product.id); // ✅ Emit product ID when "Delete" is clicked
+    this.deleteProduct.emit(this.product.id);
   }
 }

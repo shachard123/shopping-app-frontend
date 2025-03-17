@@ -6,9 +6,9 @@
 
 .product-card img {
   max-width: 100%;
-  height : 220px; // ✅ Keeps image height consistent
-  object-fit: contain; // ✅ Prevents cropping, fits image inside box
-  background-color: white; // ✅ Adds a background for non-square images
+  height : 220px; 
+  object-fit: contain; // prevents cropping
+  background-color: white; 
   display: block;
 
 }

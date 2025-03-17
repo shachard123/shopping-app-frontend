@@ -8,50 +8,52 @@ import { ShopDialogComponent } from '../../components/shop-dialog/shop-dialog.co
 @Component({
   selector: 'app-shops',
   templateUrl: './shops.component.html',
-  styleUrls: ['./shops.component.scss']
+  styleUrls: ['./shops.component.scss'],
 })
 export class ShopsComponent {
   username!: string;
-    shops: Shop[] = [];
-  
-    constructor(
-      private shopService: ShopService, 
-      private authService: AuthenticationService,
-      private dialog: MatDialog,
-      private router: Router
-    ) {}
-  
-    ngOnInit() {
-      this.username = this.authService.getLoggedInUser()?.username || 'User';
-      this.loadMyShops();
-    }
-  
-    /** ✅ Fetch all shops the user owns */
-    loadMyShops() {
-      this.shopService.getMyShops().subscribe(
-        (shops) => (this.shops = shops),
-        () => console.error("Failed to load shops")
-      );
-    }
-  
-    /** ✅ Open Shop Creation Pop-up */
-    openShopDialog() {
-      const dialogRef = this.dialog.open(ShopDialogComponent);
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) this.loadMyShops(); // Refresh after creating a shop
-      });
-    }
-  
-    deleteShop(shopId: string) {
-      this.shopService.deleteShop(shopId).subscribe({
-        next: () =>{
-          this.loadMyShops(); // ✅ Refresh shop list after deletion
-        },
-        error: (e) => console.error("Failed to delete shop with error ", e)
-      });
-    }
-  
-    goToShop(shopId: string) {
-      this.router.navigate(['/profile/shops', shopId]);
-    }
+  shops: Shop[] = [];
+
+  constructor(
+    private shopService: ShopService,
+    private authService: AuthenticationService,
+    private dialog: MatDialog,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.username = this.authService.getUsername() || 'User';
+    this.loadMyShops();
+  }
+
+  loadMyShops() {
+    this.shopService.getMyShops().subscribe({
+      next: (shops) => {
+        this.shops = shops;
+      },
+      error: (e) => console.error('Failed to load shops with error', e),
+    });
+  }
+
+  /* Shop creation dialog */
+  openShopDialog() {
+    const dialogRef = this.dialog.open(ShopDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) this.loadMyShops(); // Refresh shop list
+    });
+  }
+
+  deleteShop(shopId: string) {
+    this.shopService.deleteShop(shopId).subscribe({
+      next: () => {
+        this.loadMyShops(); // Refresh shop list
+      },
+      error: (e) => console.error('Failed to delete shop with error ', e),
+    });
+  }
+
+  //when clicked on shop
+  goToShop(shopId: string) {
+    this.router.navigate(['/profile/shops', shopId]);
+  }
 }

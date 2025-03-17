@@ -4,52 +4,39 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 
 export interface User {
+  id: string;
   username: string;
-  token?: string;
+  token: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:8080/users';
-  private tokenKey = 'authToken';
+  private readonly apiUrl = 'http://localhost:8080/users';
+  private readonly tokenKey = 'authToken';
+  private readonly userKey = 'authUser';
 
-  private currentUserSubject = new BehaviorSubject<User | null>(
-    this.getLoggedInUser()
-  );
-  currentUser$ = this.currentUserSubject.asObservable();
+  private currentUserSubject = new BehaviorSubject<User | null>(this.loadUserFromStorage());
+  public currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
   signup(username: string, password: string): Observable<{ userId: string }> {
-    return this.http
-      .post<{ userId: string }>(`${this.apiUrl}/register`, {
-        username,
-        password,
-      })
-      .pipe(
-        tap(() => {}) // No need to process response
-      );
+    return this.http.post<{ userId: string }>(`${this.apiUrl}/register`, { username, password });
   }
 
-  login(username: string, password: string): Observable<{ token: string }> {
-    return this.http
-      .post<{ token: string }>(`${this.apiUrl}/login`, { username, password })
-      .pipe(
-        tap((response) => {
-          sessionStorage.setItem(this.tokenKey, response.token);
-          this.currentUserSubject.next({ username, token: response.token });
-        })
-      );
+  login(username: string, password: string): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/login`, { username, password }).pipe(
+      tap((user) => this.storeUser(user))
+    );
   }
 
   logout(): void {
-    sessionStorage.removeItem(this.tokenKey);
-    this.currentUserSubject.next(null);
+    this.clearUser();
   }
 
-  isLoggedin(): boolean {
+  isLoggedIn(): boolean {
     return !!this.getToken();
   }
 
@@ -57,10 +44,32 @@ export class AuthenticationService {
     return sessionStorage.getItem(this.tokenKey);
   }
 
-  getLoggedInUser(): User | null {
-    const token = this.getToken();
-    if (!token) return null;
+  getUsername(): string | null {
+    return this.currentUserSubject.value?.username || null;
+  }
 
-    return { username: 'unknown', token }; // Ideally decode the JWT here
+  private loadUserFromStorage(): User | null {
+    const token = this.getToken();
+    const userData = sessionStorage.getItem(this.userKey);
+
+    if (!token || !userData) return null;
+
+    try {
+      return { ...JSON.parse(userData), token } as User;
+    } catch {
+      return null;
+    }
+  }
+
+  private storeUser(user: User): void {
+    sessionStorage.setItem(this.tokenKey, user.token);
+    sessionStorage.setItem(this.userKey, JSON.stringify(user));
+    this.currentUserSubject.next(user);
+  }
+
+  private clearUser(): void {
+    sessionStorage.removeItem(this.tokenKey);
+    sessionStorage.removeItem(this.userKey);
+    this.currentUserSubject.next(null);
   }
 }
