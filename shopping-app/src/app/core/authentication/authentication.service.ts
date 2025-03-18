@@ -19,7 +19,7 @@ export class AuthenticationService {
   public currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    this.loadUser(); // ✅ Auto-fetch user after refresh
+    this.loadUser(); // fetch user after refresh
   }
 
   signup(username: string, password: string): Observable<any> {
