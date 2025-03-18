@@ -17,9 +17,6 @@ export class ProductDialogComponent {
   stock: number | null = null;
   newProductImageBase64: string | undefined = undefined;
   selectedFileName = '';
-
-  // You might want to pass the shopId via dialog data if needed.
-  // For this example, we'll assume a dummy shopId.
   shopId:string;
 
   constructor(
@@ -40,15 +37,6 @@ export class ProductDialogComponent {
   }
 
   addProduct() {
-    // Basic validation for required fields
-    if (
-      !this.productName.trim() ||
-      !this.productDescription.trim() ||
-      !this.category.trim()
-    ) {
-      return;
-    }
-
     const product = {
       shopId: this.shopId,
       name: this.productName,

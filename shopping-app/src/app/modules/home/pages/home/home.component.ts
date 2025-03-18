@@ -41,6 +41,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.searchSubscription.unsubscribe(); // ✅ Prevent memory leaks
+    this.searchSubscription.unsubscribe();
   }
 }

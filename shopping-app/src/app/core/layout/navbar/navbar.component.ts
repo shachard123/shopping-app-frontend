@@ -25,6 +25,6 @@ export class NavbarComponent {
 
   onSearch(event: Event) {
     const query = (event.target as HTMLInputElement).value;
-    this.searchService.updateSearch(query); // ✅ Send search term to the service
+    this.searchService.updateSearch(query); // Send search term to the service
   }
 }

@@ -37,8 +37,8 @@ import { JwtInterceptor } from './interceptors/jwt.service';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatFormFieldModule, // ✅ Added
-    MatInputModule, // ✅ Added
+    MatFormFieldModule, 
+    MatInputModule, 
     HttpClientModule
   ],
   providers: [

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 
-// Import Angular Material Modules Used in Shared Components
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -16,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule
   ],
   exports: [
-    ProductCardComponent // Allow usage in HomeModule
+    ProductCardComponent 
   ]
 })
 export class SharedModule { }

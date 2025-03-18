@@ -1,6 +1,6 @@
 export interface Product {
     id: string;
-    shopId: string; // The shop selling the product
+    shopId: string; 
     name: string;
     description: string;
     category: string;

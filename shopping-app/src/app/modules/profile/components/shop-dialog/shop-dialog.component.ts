@@ -31,7 +31,6 @@ export class ShopDialogComponent {
     }
   }
 
-  /** ✅ Submit Shop Creation */
   addShop() {
     if (!this.newShopName.trim() || !this.newShopDescription.trim()) return;
 
@@ -48,7 +47,7 @@ export class ShopDialogComponent {
           : {}),
       })
       .subscribe(() => {
-        this.dialogRef.close(true); // ✅ Close pop-up and refresh list
+        this.dialogRef.close(true); // Close and refresh list
       });
   }
 }

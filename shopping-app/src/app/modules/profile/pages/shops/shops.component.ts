@@ -33,7 +33,6 @@ export class ShopsComponent {
     });
   }
 
-  /* Shop creation dialog */
   openShopDialog() {
     const dialogRef = this.dialog.open(ShopDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {

@@ -11,7 +11,7 @@ import { AuthenticationService } from 'src/app/core/authentication/authenticatio
 export class SignupComponent {
   errorMessage = '';
 
-  // Group-level validator for password matching
+  // validator for password matching
   private passwordsMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const group = control as FormGroup;
     const password = group.get('password')?.value;
@@ -19,7 +19,6 @@ export class SignupComponent {
     return password === confirmPassword ? null : { passwordsMismatch: true };
   };
 
-  // Define the form
   form = new FormGroup(
     {
       username: new FormControl('', [
@@ -66,7 +65,6 @@ export class SignupComponent {
     });
   }
 
-  // Getters for easier template access
   get usernameControl() {
     return this.form.get('username');
   }
