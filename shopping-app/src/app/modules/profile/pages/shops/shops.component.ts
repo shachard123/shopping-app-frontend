@@ -11,7 +11,6 @@ import { ShopDialogComponent } from '../../components/shop-dialog/shop-dialog.co
   styleUrls: ['./shops.component.scss'],
 })
 export class ShopsComponent {
-  username!: string;
   shops: Shop[] = [];
 
   constructor(
@@ -22,7 +21,6 @@ export class ShopsComponent {
   ) {}
 
   ngOnInit() {
-    this.username = this.authService.getUsername() || 'User';
     this.loadMyShops();
   }
 

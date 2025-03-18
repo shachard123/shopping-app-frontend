@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService, User } from 'src/app/core/authentication/authentication.service';
 import { Observable } from 'rxjs';
-import { Output, EventEmitter } from '@angular/core';
 import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({

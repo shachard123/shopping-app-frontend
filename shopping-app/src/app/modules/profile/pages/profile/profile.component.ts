@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Shop } from 'src/app/core/services/shop.service';
-import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
-
+import { Component} from '@angular/core';
+import { AuthenticationService, User } from 'src/app/core/authentication/authentication.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -9,15 +8,12 @@ import { AuthenticationService } from 'src/app/core/authentication/authenticatio
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
-  username!: string;
-  shops: Shop[] = [];
+export class ProfileComponent {
+
+  currentUser$: Observable<User | null> = this.authService.currentUser$;
 
   constructor(
-    private authService: AuthenticationService,
-  ) {}
+    private authService: AuthenticationService
+  ) { }
 
-  ngOnInit() {
-    this.username = this.authService.getUsername() || 'Unknown User';
-  }
 }
